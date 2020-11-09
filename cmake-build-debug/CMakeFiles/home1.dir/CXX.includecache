@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/denis/CLionProjects/home1/cpp/Agent.cpp
-iostream
--
-../header/Agent.h
-/home/denis/CLionProjects/home1/header/Agent.h
-
 /home/denis/CLionProjects/home1/cpp/Session.cpp
 iostream
 -
@@ -19,10 +13,10 @@ iostream
 /home/denis/CLionProjects/home1/header/Session.h
 fstream
 /home/denis/CLionProjects/home1/cpp/fstream
-../lib/json.hpp
-/home/denis/CLionProjects/home1/lib/json.hpp
 ../header/Agent.h
 /home/denis/CLionProjects/home1/header/Agent.h
+../header/Tree.h
+/home/denis/CLionProjects/home1/header/Tree.h
 
 /home/denis/CLionProjects/home1/header/Agent.h
 vector
@@ -43,6 +37,14 @@ Graph.h
 /home/denis/CLionProjects/home1/header/Graph.h
 ../lib/json.hpp
 /home/denis/CLionProjects/home1/lib/json.hpp
+
+/home/denis/CLionProjects/home1/header/Tree.h
+vector
+-
+Graph.h
+/home/denis/CLionProjects/home1/header/Graph.h
+Session.h
+/home/denis/CLionProjects/home1/header/Session.h
 
 /home/denis/CLionProjects/home1/lib/json.hpp
 algorithm
@@ -377,10 +379,4 @@ limits
 -
 type_traits
 -
-
-/home/denis/CLionProjects/home1/main.cpp
-iostream
--
-header/Session.h
-/home/denis/CLionProjects/home1/header/Session.h
 

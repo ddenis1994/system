@@ -21,6 +21,7 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
+    Graph getGraph() const;
     void setTreeType(const std::string& type);
     static nlohmann::json extractFromJsonFilePath(const std::string & jsonPath);
     void enqueueInfected(int);

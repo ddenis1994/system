@@ -3,13 +3,14 @@
 #include "../header/Session.h"
 #include "fstream"
 #include "../header/Agent.h"
+#include "../header/Tree.h"
 
 using namespace std;
 
 using json = nlohmann::json;
 
 void Session::simulate() {
-
+    Tree * a=Tree::createTree(*this,0);
 }
 
 
@@ -59,4 +60,9 @@ nlohmann::json Session::extractFromJsonFilePath(const string &jsonPath) {
     jsonFile >> jsonData;
     return jsonData;
 }
+
+Graph Session::getGraph() const {
+    return g;
+}
+
 

@@ -24,3 +24,7 @@ Graph::Graph() {
 
 }
 
+std::vector<std::vector<int>> Graph::getGraph() {
+    return edges;
+}
+

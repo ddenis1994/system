@@ -18,10 +18,14 @@ CMakeFiles/home1.dir/cpp/Session.cpp.o
  /home/denis/CLionProjects/home1/header/Agent.h
  /home/denis/CLionProjects/home1/header/Graph.h
  /home/denis/CLionProjects/home1/header/Session.h
+ /home/denis/CLionProjects/home1/header/Tree.h
  /home/denis/CLionProjects/home1/lib/json.hpp
 CMakeFiles/home1.dir/cpp/Tree.cpp.o
  /home/denis/CLionProjects/home1/cpp/Tree.cpp
+ /home/denis/CLionProjects/home1/header/Graph.h
+ /home/denis/CLionProjects/home1/header/Session.h
  /home/denis/CLionProjects/home1/header/Tree.h
+ /home/denis/CLionProjects/home1/lib/json.hpp
 CMakeFiles/home1.dir/main.cpp.o
  /home/denis/CLionProjects/home1/header/Graph.h
  /home/denis/CLionProjects/home1/header/Session.h
