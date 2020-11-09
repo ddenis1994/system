@@ -34,7 +34,7 @@ int Session::dequeueInfected() {
 }
 
 TreeType Session::getTreeType() const {
-    return Cycle;
+    return treeType;
 }
 
 Session::Session(const std::string &path) {
@@ -42,11 +42,23 @@ Session::Session(const std::string &path) {
     json jsonData;
     jsonFile >> jsonData;
     setGraph(Graph(jsonData["graph"]));
+    setTreeType(jsonData["tree"]);
     vector<pair<string ,int>> agentsVector = jsonData["agents"];
     for (auto item : agentsVector) {
         Agent *virus = Agent::createAgent(item);
         addAgent(*virus);
     }
+
+
+}
+
+void Session::setTreeType(const std::string& type) {
+    if (type=="R")
+        treeType=Root;
+    if(type=="M")
+        treeType=MaxRank;
+    if(type=="C")
+        treeType=Cycle;
 
 
 }
