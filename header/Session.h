@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Graph.h"
+#include "../lib/json.hpp"
 
 class Agent;
 
@@ -21,6 +22,7 @@ public:
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
     void setTreeType(const std::string& type);
+    static nlohmann::json extractFromJsonFilePath(const std::string & jsonPath);
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;

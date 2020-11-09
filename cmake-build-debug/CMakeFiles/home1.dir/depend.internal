@@ -6,6 +6,7 @@ CMakeFiles/home1.dir/cpp/Agent.cpp.o
  /home/denis/CLionProjects/home1/header/Agent.h
  /home/denis/CLionProjects/home1/header/Graph.h
  /home/denis/CLionProjects/home1/header/Session.h
+ /home/denis/CLionProjects/home1/lib/json.hpp
 CMakeFiles/home1.dir/cpp/BFS.cpp.o
  /home/denis/CLionProjects/home1/cpp/BFS.cpp
  /home/denis/CLionProjects/home1/header/BFS.h

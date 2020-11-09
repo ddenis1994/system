@@ -41,6 +41,8 @@ string
 -
 Graph.h
 /home/denis/CLionProjects/home1/header/Graph.h
+../lib/json.hpp
+/home/denis/CLionProjects/home1/lib/json.hpp
 
 /home/denis/CLionProjects/home1/lib/json.hpp
 algorithm
@@ -379,8 +381,6 @@ type_traits
 /home/denis/CLionProjects/home1/main.cpp
 iostream
 -
-lib/json.hpp
-/home/denis/CLionProjects/home1/lib/json.hpp
 header/Session.h
 /home/denis/CLionProjects/home1/header/Session.h
 

@@ -1,5 +1,4 @@
 #include <iostream>
-#include "lib/json.hpp"
 #include "header/Session.h"
 
 using namespace std;

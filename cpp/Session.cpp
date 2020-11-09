@@ -1,11 +1,7 @@
-//
-// Created by denis on 08/11/2020.
-//
 
 #include <iostream>
 #include "../header/Session.h"
 #include "fstream"
-#include "../lib/json.hpp"
 #include "../header/Agent.h"
 
 using namespace std;
@@ -38,9 +34,7 @@ TreeType Session::getTreeType() const {
 }
 
 Session::Session(const std::string &path) {
-    ifstream jsonFile(path);
-    json jsonData;
-    jsonFile >> jsonData;
+    json jsonData=extractFromJsonFilePath(path);
     setGraph(Graph(jsonData["graph"]));
     setTreeType(jsonData["tree"]);
     vector<pair<string ,int>> agentsVector = jsonData["agents"];
@@ -48,8 +42,6 @@ Session::Session(const std::string &path) {
         Agent *virus = Agent::createAgent(item);
         addAgent(*virus);
     }
-
-
 }
 
 void Session::setTreeType(const std::string& type) {
@@ -59,7 +51,12 @@ void Session::setTreeType(const std::string& type) {
         treeType=MaxRank;
     if(type=="C")
         treeType=Cycle;
+}
 
-
+nlohmann::json Session::extractFromJsonFilePath(const string &jsonPath) {
+    ifstream jsonFile(jsonPath);
+    json jsonData;
+    jsonFile >> jsonData;
+    return jsonData;
 }
 
