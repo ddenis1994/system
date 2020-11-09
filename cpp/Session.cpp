@@ -6,6 +6,8 @@
 #include "../header/Session.h"
 #include "fstream"
 #include "../lib/json.hpp"
+#include "../header/Agent.h"
+
 using namespace std;
 
 using json = nlohmann::json;
@@ -15,13 +17,12 @@ void Session::simulate() {
 }
 
 
-
 void Session::addAgent(const Agent &agent) {
-
+    this->agents.push_back((Agent *const) & agent);
 }
 
 void Session::setGraph(const Graph &graph) {
-
+    g = graph;
 }
 
 void Session::enqueueInfected(int) {
@@ -37,8 +38,16 @@ TreeType Session::getTreeType() const {
 }
 
 Session::Session(const std::string &path) {
-    ifstream x (path);
-    json j;
-    x >> j;
-    g=Graph(j["graph"]);
+    ifstream jsonFile(path);
+    json jsonData;
+    jsonFile >> jsonData;
+    setGraph(Graph(jsonData["graph"]));
+    vector<pair<string ,int>> agentsVector = jsonData["agents"];
+    for (auto item : agentsVector) {
+        Agent *virus = Agent::createAgent(item);
+        addAgent(*virus);
+    }
+
+
 }
+

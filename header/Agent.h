@@ -7,6 +7,7 @@
 class Agent{
 public:
     Agent();
+    static Agent * createAgent(std::pair<std::string,int> & agent);
 
     virtual void act(Session& session)=0;
 };

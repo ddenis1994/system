@@ -8,6 +8,8 @@ using namespace std;
 
 Graph::Graph(std::vector<std::vector<int>> matrix) {
     this->edges=matrix;
+
+
 }
 
 void Graph::infectNode(int nodeInd) {
@@ -21,3 +23,4 @@ bool Graph::isInfected(int nodeInd) {
 Graph::Graph() {
 
 }
+
