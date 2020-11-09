@@ -6,43 +6,43 @@
 #include "../header/Tree.h"
 #include "../header/Session.h"
 
-Tree::Tree(int rootLabel):node(rootLabel) {
+Tree::Tree(int rootLabel) : node(rootLabel) {
 
 }
 
 void Tree::addChild(const Tree &child) {
 
-    children.push_back((Tree *const)& child);
+    children.push_back((Tree *const) &child);
 }
 
 Tree *Tree::createTree(const Session &session, int rootLabel) {
     TreeType type = session.getTreeType();
     Graph graph = session.getGraph();
-    Tree * root= makeTreeByType(type, rootLabel);
+    Tree *root = makeTreeByType(type, rootLabel);
     makeBfsTree(graph, root, type);
     return root;
 }
 
 
-Tree *Tree::makeBfsTree(Graph graph, Tree * root, TreeType type) {
-    int numVertices = (graph.getGraph().size())-1;
-    bool* visited;
+Tree *Tree::makeBfsTree(Graph graph, Tree *root, TreeType type) {
+    int numVertices = (graph.getGraph().size()) - 1;
+    bool *visited;
     visited = new bool[numVertices];
     for (int i = 0; i < numVertices; i++)
         visited[i] = false;
-    auto queue = std::vector<Tree*>();
+    auto queue = std::vector<Tree *>();
     visited[root->node] = true;
     queue.push_back(root);
 
     while (!queue.empty()) {
         auto currVertex = queue.front();
         queue.erase(queue.begin());
-        auto edges=graph.getGraph()[currVertex->node];
+        auto edges = graph.getGraph()[currVertex->node];
         for (int i = 0; i <= numVertices; i++) {
-            if(edges[i]==1){
+            if (edges[i] == 1) {
                 if (!visited[i]) {
                     visited[i] = true;
-                    Tree * child= makeTreeByType(type, i);
+                    Tree *child = makeTreeByType(type, i);
                     currVertex->addChild(*child);
                     queue.push_back(child);
                 }
@@ -55,16 +55,16 @@ Tree *Tree::makeBfsTree(Graph graph, Tree * root, TreeType type) {
 }
 
 Tree *Tree::makeTreeByType(TreeType type, int node) {
-    Tree * root;
+    Tree *root;
     switch (type) {
         case Root:
-            root= new RootTree(node);
+            root = new RootTree(node);
             break;
         case Cycle:
-            root= new CycleTree(0, node, 0);
+            root = new CycleTree(0, node, 0);
             break;
         case MaxRank:
-            root= new MaxRankTree(node);
+            root = new MaxRankTree(node);
             break;
         default:
             return nullptr;
@@ -95,7 +95,7 @@ MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 }
 
 int MaxRankTree::traceTree() {
-    return searchForMaxRank(this, 0);
+    return searchForMaxRank(this, this)->getNode();
 }
 
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
@@ -103,16 +103,19 @@ RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 }
 
 
-int MaxRankTree::searchForMaxRank(const MaxRankTree * node, int maxRank) const {
+MaxRankTree *MaxRankTree::searchForMaxRank( MaxRankTree *node, MaxRankTree *maxNode) {
     if (node->getChildren().empty())
-        return 0;
-    const auto& children=node->getChildren();
-
-    for(const auto& value: children) {
-        int childCount=searchForMaxRank(dynamic_cast<const MaxRankTree *>(value), maxRank);
-
+        return node;
+    std::vector<MaxRankTree *>children = (const std::vector<MaxRankTree *, std::allocator<MaxRankTree *>> &) node->getChildren();
+    const auto childCount = children.size() - 1;
+    for (int i = 0; i <= childCount; i++) {
+        MaxRankTree * child = searchForMaxRank(children[i], maxNode);
+        if (child->getChildren().size() > node->getChildren().size())
+            maxNode = child;
+        else
+            maxNode=node;
     }
-    return 0;
+    return maxNode;
 }
 
 int RootTree::traceTree() {
