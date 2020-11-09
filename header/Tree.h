@@ -12,13 +12,18 @@ public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
     static Tree* createTree(const Session& session, int rootLabel);
-    static Tree *makeBfsTree(Graph graph, Tree *root, TreeType type);
+    int getNode() const;
     virtual int traceTree()=0;
-private:
-    int node{};
-    std::vector<Tree*> children;
 
-    static Tree *makeTreeType(TreeType type, int node);
+protected:
+
+    const std::vector<Tree *> & getChildren() const;
+
+private:
+    std::vector<Tree*> children;
+    int node{};
+    static Tree *makeBfsTree(Graph graph, Tree *root, TreeType type);
+    static Tree *makeTreeByType(TreeType type, int node);
 };
 
 class CycleTree: public Tree{
@@ -33,12 +38,20 @@ class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
+
+private:
+    int searchForMaxRank(const MaxRankTree *node, int maxRank) const;
 };
 
 class RootTree: public Tree{
 public:
     RootTree(int rootLabel);
     virtual int traceTree();
+};
+
+class Max{
+    int children;
+    int node;
 };
 
 #endif
