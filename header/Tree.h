@@ -11,7 +11,9 @@ class Tree{
 public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
+    Tree (const Tree & oldTree);
     static Tree* createTree(const Session& session, int rootLabel);
+    virtual ~Tree();
     int getNode() const;
     virtual int traceTree()=0;
 

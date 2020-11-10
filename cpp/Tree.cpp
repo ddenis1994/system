@@ -6,6 +6,8 @@
 #include "../header/Tree.h"
 #include "../header/Session.h"
 
+using namespace std;
+
 Tree::Tree(int rootLabel) : node(rootLabel) {
 
 }
@@ -79,6 +81,15 @@ int Tree::getNode() const {
 
 const std::vector<Tree *> &Tree::getChildren() const {
     return children;
+}
+
+//copy constructor
+Tree::Tree(const Tree &oldTree) {
+
+}
+
+Tree::~Tree() {
+cout<<"tet"<<endl;
 }
 
 
