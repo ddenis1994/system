@@ -40,7 +40,7 @@ public:
     virtual int traceTree();
 
 private:
-     static MaxRankTree * searchForMaxRank( MaxRankTree *node) ;
+     static const MaxRankTree & searchForMaxRank( const MaxRankTree & node) ;
 };
 
 class RootTree: public Tree{
