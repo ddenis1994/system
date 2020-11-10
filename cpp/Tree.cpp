@@ -95,7 +95,7 @@ MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 }
 
 int MaxRankTree::traceTree() {
-    return searchForMaxRank(this, this)->getNode();
+    return searchForMaxRank(this)->getNode();
 }
 
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
@@ -103,19 +103,18 @@ RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 }
 
 
-MaxRankTree *MaxRankTree::searchForMaxRank( MaxRankTree *node, MaxRankTree *maxNode) {
+MaxRankTree *MaxRankTree::searchForMaxRank(MaxRankTree *node) {
     if (node->getChildren().empty())
         return node;
-    std::vector<MaxRankTree *>children = (const std::vector<MaxRankTree *, std::allocator<MaxRankTree *>> &) node->getChildren();
-    const auto childCount = children.size() - 1;
-    for (int i = 0; i <= childCount; i++) {
-        MaxRankTree * child = searchForMaxRank(children[i], maxNode);
-        if (child->getChildren().size() > node->getChildren().size())
-            maxNode = child;
-        else
-            maxNode=node;
+    std::vector<MaxRankTree *> children = (const std::vector<MaxRankTree *, std::allocator<MaxRankTree *>> &) node->getChildren();
+    const auto childCount = children.size();
+    MaxRankTree *maxChild = node;
+    for (int i = 0; i < childCount; i++) {
+        MaxRankTree *child = searchForMaxRank(children[i]);
+        if (child->getChildren().size() > maxChild->getChildren().size())
+            maxChild = child;
     }
-    return maxNode;
+    return maxChild;
 }
 
 int RootTree::traceTree() {
