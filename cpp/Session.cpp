@@ -12,6 +12,20 @@ using json = nlohmann::json;
 void Session::simulate() {
     Tree * a=Tree::createTree(*this,0);
     int v=a->traceTree();
+    while (true)
+    {
+        bool cont = this->cycle();
+        if (!cont)
+            break;
+    }
+}
+bool Session::cycle() {
+    for (Agent* a : this->agents)
+        a->act(*this);
+    return !this->checkEnd();
+}
+bool Session::checkEnd() {
+    return true;
 }
 
 
@@ -23,12 +37,14 @@ void Session::setGraph(const Graph &graph) {
     g = graph;
 }
 
-void Session::enqueueInfected(int) {
-
+void Session::enqueueInfected(int n) {
+    this->infected.push(n);
 }
 
 int Session::dequeueInfected() {
-    return 0;
+    int result = this->infected.front();
+    this->infected.pop();
+    return result;
 }
 
 TreeType Session::getTreeType() const {

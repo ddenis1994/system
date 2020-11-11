@@ -8,16 +8,16 @@ using namespace std;
 
 Graph::Graph(std::vector<std::vector<int>> matrix) {
     this->edges=matrix;
-
-
+    for (int i = 0; i < this->edges.size(); i++)
+        infected.push_back(0);
 }
 
 void Graph::infectNode(int nodeInd) {
-
+    infected[nodeInd] = 1;
 }
 
 bool Graph::isInfected(int nodeInd) {
-    return false;
+    return infected[nodeInd] == 1;
 }
 
 Graph::Graph() {

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <queue>
 #include "Graph.h"
 #include "../lib/json.hpp"
 
@@ -32,6 +33,9 @@ private:
     Graph g ;
     TreeType treeType;
     std::vector<Agent*> agents;
+    std::queue<int> infected;
+    bool cycle();
+    bool checkEnd();
 };
 
 #endif
