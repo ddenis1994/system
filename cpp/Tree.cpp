@@ -115,11 +115,34 @@ Tree *Tree::copy() {
 }
 
 int CycleTree::traceTree() {
+
+
+
     return 0;
 }
 
 CycleTree::CycleTree( int rootLabel, int currCycle) : Tree(rootLabel) ,currCycle(currCycle){
 
+}
+
+CycleTree & CycleTree::innerTraversTree(CycleTree & root,int c) {
+    //in case last
+    if (c<1)
+        return root;
+    if (root.getChildren().empty())
+        return *new CycleTree(-1,c-1);
+    else{
+        auto oldTreeChildren=root.getChildren();
+        for (auto oldTreeChild = oldTreeChildren.begin(); oldTreeChild < oldTreeChildren.end(); ++oldTreeChild) {
+            auto child= reinterpret_cast<CycleTree &>(*oldTreeChild);
+            CycleTree & childForTest=innerTraversTree(child, c - 1);
+            if (childForTest.getNode() != -1)
+                return childForTest;
+            delete & childForTest;
+            c=childForTest.currCycle;
+        }
+    }
+    return *new CycleTree(-1,c);
 }
 
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {

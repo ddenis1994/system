@@ -33,6 +33,7 @@ public:
     CycleTree( int rootLabel, int currCycle);
     virtual int traceTree();
 private:
+    CycleTree & innerTraversTree(CycleTree & root,int c);
     int currCycle;
 };
 
@@ -49,6 +50,8 @@ class RootTree: public Tree{
 public:
     RootTree(int rootLabel);
     virtual int traceTree();
+
+
 };
 
 class Max{
