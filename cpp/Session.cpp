@@ -61,6 +61,22 @@ Session::Session(const std::string &path) {
         addAgent(*virus);
     }
 }
+Session::~Session()
+{
+    delete(&g);
+    for (Agent* a : agents)
+        delete(a);
+    delete(&agents);
+    delete(&infected);
+}
+Session::Session(const Session& session)
+{
+    g = Graph(session.g);
+    treeType = session.treeType;
+    agents = std::vector<Agent*>(session.agents);
+    infected = std::queue<int>(session.infected);
+    delete(&session.agents);
+}
 
 void Session::setTreeType(const std::string& type) {
     if (type=="R")

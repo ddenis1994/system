@@ -23,6 +23,19 @@ bool Graph::isInfected(int nodeInd) {
 Graph::Graph() {
 
 }
+Graph::Graph(const Graph &graph)
+{
+    edges = graph.edges;
+    infected = graph.infected;
+}
+Graph::~Graph() {
+    for (std::vector<int> v : edges)
+    {
+        delete(&v);
+    }
+    delete(&edges);
+    delete(&infected);
+}
 
 std::vector<std::vector<int>> Graph::getGraph() {
     return edges;
