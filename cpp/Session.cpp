@@ -12,6 +12,7 @@ using json = nlohmann::json;
 void Session::simulate() {
     Tree * a=Tree::createTree(*this,0);
     int v=a->traceTree();
+    delete a;
 }
 
 

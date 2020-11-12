@@ -11,8 +11,6 @@ iostream
 -
 ../header/Tree.h
 /home/denis/CLionProjects/home1/header/Tree.h
-../header/Session.h
-/home/denis/CLionProjects/home1/header/Session.h
 
 /home/denis/CLionProjects/home1/header/Graph.h
 vector
