@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../header/Tree.h"
+#include "../include/Tree.h"
 
 using namespace std;
 

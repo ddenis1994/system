@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../header/Graph.h"
+#include "../include/Graph.h"
 using namespace std;
 
 Graph::Graph(std::vector<std::vector<int>> matrix) {

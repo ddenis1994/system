@@ -170,33 +170,6 @@ cpp/Agent.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/home1.dir/build.make CMakeFiles/home1.dir/cpp/Agent.cpp.s
 .PHONY : cpp/Agent.cpp.s
 
-cpp/BFS.o: cpp/BFS.cpp.o
-
-.PHONY : cpp/BFS.o
-
-# target to build an object file
-cpp/BFS.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/home1.dir/build.make CMakeFiles/home1.dir/cpp/BFS.cpp.o
-.PHONY : cpp/BFS.cpp.o
-
-cpp/BFS.i: cpp/BFS.cpp.i
-
-.PHONY : cpp/BFS.i
-
-# target to preprocess a source file
-cpp/BFS.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/home1.dir/build.make CMakeFiles/home1.dir/cpp/BFS.cpp.i
-.PHONY : cpp/BFS.cpp.i
-
-cpp/BFS.s: cpp/BFS.cpp.s
-
-.PHONY : cpp/BFS.s
-
-# target to generate assembly for a file
-cpp/BFS.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/home1.dir/build.make CMakeFiles/home1.dir/cpp/BFS.cpp.s
-.PHONY : cpp/BFS.cpp.s
-
 cpp/Graph.o: cpp/Graph.cpp.o
 
 .PHONY : cpp/Graph.o
@@ -317,9 +290,6 @@ help:
 	@echo "... cpp/Agent.o"
 	@echo "... cpp/Agent.i"
 	@echo "... cpp/Agent.s"
-	@echo "... cpp/BFS.o"
-	@echo "... cpp/BFS.i"
-	@echo "... cpp/BFS.s"
 	@echo "... cpp/Graph.o"
 	@echo "... cpp/Graph.i"
 	@echo "... cpp/Graph.s"

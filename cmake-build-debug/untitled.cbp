@@ -85,9 +85,6 @@
 		<Unit filename="/home/denis/CLionProjects/home1/cpp/Agent.cpp">
 			<Option target="home1"/>
 		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/cpp/BFS.cpp">
-			<Option target="home1"/>
-		</Unit>
 		<Unit filename="/home/denis/CLionProjects/home1/cpp/Graph.cpp">
 			<Option target="home1"/>
 		</Unit>
@@ -97,19 +94,16 @@
 		<Unit filename="/home/denis/CLionProjects/home1/cpp/Tree.cpp">
 			<Option target="home1"/>
 		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/header/Agent.h">
+		<Unit filename="/home/denis/CLionProjects/home1/include/Agent.h">
 			<Option target="home1"/>
 		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/header/BFS.h">
+		<Unit filename="/home/denis/CLionProjects/home1/include/Graph.h">
 			<Option target="home1"/>
 		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/header/Graph.h">
+		<Unit filename="/home/denis/CLionProjects/home1/include/Session.h">
 			<Option target="home1"/>
 		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/header/Session.h">
-			<Option target="home1"/>
-		</Unit>
-		<Unit filename="/home/denis/CLionProjects/home1/header/Tree.h">
+		<Unit filename="/home/denis/CLionProjects/home1/include/Tree.h">
 			<Option target="home1"/>
 		</Unit>
 		<Unit filename="/home/denis/CLionProjects/home1/main.cpp">

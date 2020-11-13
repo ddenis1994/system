@@ -1,16 +1,20 @@
 
 #include <iostream>
-#include "../header/Session.h"
+
 #include "fstream"
-#include "../header/Agent.h"
-#include "../header/Tree.h"
+#include "../lib/json.hpp"
+#include "../include/Session.h"
+#include "../include/Tree.h"
+#include "../include/Agent.h"
+
 
 using namespace std;
 
 using json = nlohmann::json;
 
 void Session::simulate() {
-    auto * a= dynamic_cast<MaxRankTree *>(Tree::createTree(*this, 0));
+    auto * a= dynamic_cast<MaxRankTree *>(Tree::createTree(*this, 1));
+    auto h=a->traceTree();
     auto *b=new MaxRankTree(*a);
     auto *c =b->copy();
     delete c;

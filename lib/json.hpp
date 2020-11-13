@@ -11889,7 +11889,7 @@ class binary_writer
     //////////
 
     /*!
-    @return The size of a BSON document entry header, including the id marker
+    @return The size of a BSON document entry include, including the id marker
             and the entry name size (and its null-terminator).
     */
     static std::size_t calc_bson_entry_header_size(const string_t& name)

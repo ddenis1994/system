@@ -9,42 +9,44 @@
 /home/denis/CLionProjects/home1/cpp/Session.cpp
 iostream
 -
-../header/Session.h
-/home/denis/CLionProjects/home1/header/Session.h
 fstream
 /home/denis/CLionProjects/home1/cpp/fstream
-../header/Agent.h
-/home/denis/CLionProjects/home1/header/Agent.h
-../header/Tree.h
-/home/denis/CLionProjects/home1/header/Tree.h
+../lib/json.hpp
+/home/denis/CLionProjects/home1/lib/json.hpp
+../include/Session.h
+/home/denis/CLionProjects/home1/include/Session.h
+../include/Tree.h
+/home/denis/CLionProjects/home1/include/Tree.h
+../include/Agent.h
+/home/denis/CLionProjects/home1/include/Agent.h
 
-/home/denis/CLionProjects/home1/header/Agent.h
+/home/denis/CLionProjects/home1/include/Agent.h
 vector
 -
 Session.h
-/home/denis/CLionProjects/home1/header/Session.h
+/home/denis/CLionProjects/home1/include/Session.h
 
-/home/denis/CLionProjects/home1/header/Graph.h
+/home/denis/CLionProjects/home1/include/Graph.h
 vector
 -
 
-/home/denis/CLionProjects/home1/header/Session.h
+/home/denis/CLionProjects/home1/include/Session.h
 vector
 -
 string
 -
 Graph.h
-/home/denis/CLionProjects/home1/header/Graph.h
+/home/denis/CLionProjects/home1/include/Graph.h
 ../lib/json.hpp
 /home/denis/CLionProjects/home1/lib/json.hpp
 
-/home/denis/CLionProjects/home1/header/Tree.h
+/home/denis/CLionProjects/home1/include/Tree.h
 vector
 -
 Graph.h
-/home/denis/CLionProjects/home1/header/Graph.h
+/home/denis/CLionProjects/home1/include/Graph.h
 Session.h
-/home/denis/CLionProjects/home1/header/Session.h
+/home/denis/CLionProjects/home1/include/Session.h
 
 /home/denis/CLionProjects/home1/lib/json.hpp
 algorithm

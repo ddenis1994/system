@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/denis/CLionProjects/home1/cpp/Agent.cpp" "/home/denis/CLionProjects/home1/cmake-build-debug/CMakeFiles/home1.dir/cpp/Agent.cpp.o"
-  "/home/denis/CLionProjects/home1/cpp/BFS.cpp" "/home/denis/CLionProjects/home1/cmake-build-debug/CMakeFiles/home1.dir/cpp/BFS.cpp.o"
   "/home/denis/CLionProjects/home1/cpp/Graph.cpp" "/home/denis/CLionProjects/home1/cmake-build-debug/CMakeFiles/home1.dir/cpp/Graph.cpp.o"
   "/home/denis/CLionProjects/home1/cpp/Session.cpp" "/home/denis/CLionProjects/home1/cmake-build-debug/CMakeFiles/home1.dir/cpp/Session.cpp.o"
   "/home/denis/CLionProjects/home1/cpp/Tree.cpp" "/home/denis/CLionProjects/home1/cmake-build-debug/CMakeFiles/home1.dir/cpp/Tree.cpp.o"
