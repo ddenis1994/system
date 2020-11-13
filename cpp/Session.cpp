@@ -26,6 +26,7 @@ bool Session::cycle() {
 }
 bool Session::checkEnd() {
     return true;
+    delete a;
 }
 
 
