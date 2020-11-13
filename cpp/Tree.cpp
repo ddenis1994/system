@@ -115,10 +115,7 @@ Tree *Tree::copy() {
 }
 
 int CycleTree::traceTree() {
-
-
-
-    return 0;
+    return innerTraversTree(*this,this->currCycle).getNode();
 }
 
 CycleTree::CycleTree( int rootLabel, int currCycle) : Tree(rootLabel) ,currCycle(currCycle){
@@ -129,6 +126,7 @@ CycleTree & CycleTree::innerTraversTree(CycleTree & root,int c) {
     //in case last
     if (c<1)
         return root;
+    //return non end;
     if (root.getChildren().empty())
         return *new CycleTree(-1,c-1);
     else{
@@ -136,6 +134,7 @@ CycleTree & CycleTree::innerTraversTree(CycleTree & root,int c) {
         for (auto oldTreeChild = oldTreeChildren.begin(); oldTreeChild < oldTreeChildren.end(); ++oldTreeChild) {
             auto child= reinterpret_cast<CycleTree &>(*oldTreeChild);
             CycleTree & childForTest=innerTraversTree(child, c - 1);
+            //found the end
             if (childForTest.getNode() != -1)
                 return childForTest;
             delete & childForTest;
