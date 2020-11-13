@@ -24,7 +24,7 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
 }
 
 
-void Tree::makeBfsTree(Graph graph, Tree *root) {
+void Tree::makeBfsTree(const Graph & graph, Tree *root) {
     auto numVertices = (graph.getGraph().size()) - 1;
     bool *visited;
     visited = new bool[numVertices];

@@ -10,8 +10,12 @@ using namespace std;
 using json = nlohmann::json;
 
 void Session::simulate() {
-    Tree * a=Tree::createTree(*this,0);
+    auto * a= dynamic_cast<MaxRankTree *>(Tree::createTree(*this, 0));
+    auto *b=new MaxRankTree(*a);
+    auto *c =b->copy();
+    delete c;
     delete a;
+    delete b;
 }
 
 

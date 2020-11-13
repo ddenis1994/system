@@ -7,7 +7,7 @@ class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
     Graph();
-    std::vector<std::vector<int>> getGraph();
+    std::vector<std::vector<int>> getGraph() const;
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
 private:

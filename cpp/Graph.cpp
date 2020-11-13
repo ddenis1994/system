@@ -24,7 +24,7 @@ Graph::Graph() {
 
 }
 
-std::vector<std::vector<int>> Graph::getGraph() {
+std::vector<std::vector<int>> Graph::getGraph() const {
     return edges;
 }
 

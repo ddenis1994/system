@@ -6,11 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/denis/CLionProjects/home1/cpp/Tree.cpp
+/home/denis/CLionProjects/home1/cpp/Session.cpp
 iostream
 -
+../header/Session.h
+/home/denis/CLionProjects/home1/header/Session.h
+fstream
+/home/denis/CLionProjects/home1/cpp/fstream
+../header/Agent.h
+/home/denis/CLionProjects/home1/header/Agent.h
 ../header/Tree.h
 /home/denis/CLionProjects/home1/header/Tree.h
+
+/home/denis/CLionProjects/home1/header/Agent.h
+vector
+-
+Session.h
+/home/denis/CLionProjects/home1/header/Session.h
 
 /home/denis/CLionProjects/home1/header/Graph.h
 vector
