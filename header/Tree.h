@@ -17,15 +17,15 @@ public:
     virtual ~Tree();
     int getNode() const;
     virtual int traceTree()=0;
-    std::vector<Tree *> & getChildren() ;
+    std::vector<Tree *> getChildren() const;
     static TreeType type;
 
 private:
 
-    std::vector<Tree*> children;
     int node{};
-    static Tree *makeBfsTree(Graph graph, Tree *root);
+    static void makeBfsTree(Graph graph, Tree *root);
     static Tree *makeTreeByType( int node);
+    std::vector<Tree*> children;
 };
 
 class CycleTree: public Tree{
@@ -33,7 +33,7 @@ public:
     CycleTree( int rootLabel, int currCycle);
     virtual int traceTree();
 private:
-    CycleTree & innerTraversTree(CycleTree & root,int c);
+    const CycleTree * innerTraversTree(const Tree & root,int c);
     int currCycle;
 };
 
@@ -54,9 +54,5 @@ public:
 
 };
 
-class Max{
-    int children;
-    int node;
-};
 
 #endif
