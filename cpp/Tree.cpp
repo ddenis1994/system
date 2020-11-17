@@ -156,12 +156,12 @@ RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 }
 
 
-const MaxRankTree * MaxRankTree::searchForMaxRank() const {
+const MaxRankTree *MaxRankTree::searchForMaxRank() const {
     if (this->getChildren().empty())
         return this;
     auto children = this->getChildren();
     int maxChildCount = getChildren().size();
-    const MaxRankTree *maxChild = nullptr;
+    const MaxRankTree *maxChild = this;
     for (auto child = children.begin(); child < children.end(); ++child) {
         auto castedMaxRank = dynamic_cast<MaxRankTree *>(*child);
         auto childToTest = castedMaxRank->searchForMaxRank();
@@ -170,10 +170,8 @@ const MaxRankTree * MaxRankTree::searchForMaxRank() const {
             maxChild = childToTest;
         }
     }
-    if (maxChild != nullptr)
-        return maxChild;
-    else
-        return this;
+    return maxChild;
+
 }
 
 int RootTree::traceTree() {
