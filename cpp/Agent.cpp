@@ -5,6 +5,10 @@
 #include <iostream>
 #include "../include/Agent.h"
 
+
+class Tree;
+class Graph;
+
 Agent::Agent() {
 
 }

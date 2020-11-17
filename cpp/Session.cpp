@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include "../header/Session.h"
 #include "fstream"
 #include "../lib/json.hpp"
 #include "../include/Session.h"
@@ -29,7 +28,6 @@ bool Session::cycle() {
 }
 bool Session::checkEnd() {
     return true;
-    delete a;
 }
 
 
