@@ -1,6 +1,6 @@
 
 #include <iostream>
-
+#include "../header/Session.h"
 #include "fstream"
 #include "../lib/json.hpp"
 #include "../include/Session.h"
@@ -13,13 +13,23 @@ using namespace std;
 using json = nlohmann::json;
 
 void Session::simulate() {
-    auto * a= dynamic_cast<MaxRankTree *>(Tree::createTree(*this, 1));
-    auto h=a->traceTree();
-    auto *b=new MaxRankTree(*a);
-    auto *c =b->copy();
-    delete c;
+    Tree * a=Tree::createTree(*this,0);
+    int v=a->traceTree();
+    while (true)
+    {
+        bool cont = this->cycle();
+        if (!cont)
+            break;
+    }
+}
+bool Session::cycle() {
+    for (Agent* a : this->agents)
+        a->act(*this);
+    return !this->checkEnd();
+}
+bool Session::checkEnd() {
+    return true;
     delete a;
-    delete b;
 }
 
 
@@ -31,12 +41,14 @@ void Session::setGraph(const Graph &graph) {
     g = graph;
 }
 
-void Session::enqueueInfected(int) {
-
+void Session::enqueueInfected(int n) {
+    this->infected.push(n);
 }
 
 int Session::dequeueInfected() {
-    return 0;
+    int result = this->infected.front();
+    this->infected.pop();
+    return result;
 }
 
 TreeType Session::getTreeType() const {
@@ -52,6 +64,22 @@ Session::Session(const std::string &path) {
         Agent *virus = Agent::createAgent(item);
         addAgent(*virus);
     }
+}
+Session::~Session()
+{
+    delete(&g);
+    for (Agent* a : agents)
+        delete(a);
+    delete(&agents);
+    delete(&infected);
+}
+Session::Session(const Session& session)
+{
+    g = Graph(session.g);
+    treeType = session.treeType;
+    agents = std::vector<Agent*>(session.agents);
+    infected = std::queue<int>(session.infected);
+    delete(&session.agents);
 }
 
 void Session::setTreeType(const std::string& type) {
