@@ -16,15 +16,15 @@ void Tree::addChild(Tree &child) {
 
 
 Tree *Tree::createTree(const Session &session, int rootLabel) {
-    Tree::type=session.getTreeType();
+    Tree::type = session.getTreeType();
     Graph graph = session.getGraph();
-    Tree *root = makeTreeByType( rootLabel);
+    Tree *root = makeTreeByType(rootLabel);
     makeBfsTree(graph, root);
     return root;
 }
 
 
-void Tree::makeBfsTree(const Graph & graph, Tree *root) {
+void Tree::makeBfsTree(const Graph &graph, Tree *root) {
     auto numVertices = (graph.getGraph().size()) - 1;
     bool *visited;
     visited = new bool[numVertices];
@@ -41,24 +41,24 @@ void Tree::makeBfsTree(const Graph & graph, Tree *root) {
             if (edges[i] == 1) {
                 if (!visited[i]) {
                     visited[i] = true;
-                    Tree * child = makeTreeByType(i);
+                    Tree *child = makeTreeByType(i);
                     currVertex->addChild(*child);
                     queue.push_back(child);
                 }
             }
         }
     }
-    delete [] visited;
+    delete[] visited;
 }
 
-Tree *Tree::makeTreeByType( int node) {
+Tree *Tree::makeTreeByType(int node) {
     Tree *root;
     switch (type) {
         case Root:
             root = new RootTree(node);
             break;
         case Cycle:
-            root = new CycleTree( node, 0);
+            root = new CycleTree(node, 0);
             break;
         case MaxRank:
             root = new MaxRankTree(node);
@@ -80,11 +80,11 @@ vector<Tree *> Tree::getChildren() const {
 
 //copy constructor
 Tree::Tree(const Tree &oldTree) {
-    this->node=oldTree.node;
+    this->node = oldTree.node;
     if (!this->getChildren().empty()) {
-        auto nodeChildren=this->getChildren();
+        auto nodeChildren = this->getChildren();
         for (auto i = nodeChildren.begin(); i < nodeChildren.end(); ++i) {
-            Tree * cloneChild=(*i)->copy();
+            Tree *cloneChild = (*i)->copy();
             this->children.push_back(cloneChild);
         }
     }
@@ -101,12 +101,12 @@ Tree::~Tree() {
 }
 
 Tree *Tree::copy() {
-    Tree * newTree=makeTreeByType(this->getNode());
-    newTree->node=this->node;
-    const auto oldTreeChildren=this->children;
+    Tree *newTree = makeTreeByType(this->getNode());
+    newTree->node = this->node;
+    const auto oldTreeChildren = this->children;
     if (!oldTreeChildren.empty()) {
         for (auto oldTreeChild = oldTreeChildren.begin(); oldTreeChild < oldTreeChildren.end(); ++oldTreeChild) {
-            Tree * cloneChild=(*oldTreeChild)->copy();
+            Tree *cloneChild = (*oldTreeChild)->copy();
             newTree->children.push_back(cloneChild);
         }
     }
@@ -114,33 +114,33 @@ Tree *Tree::copy() {
 }
 
 int CycleTree::traceTree() {
-    return innerTraversTree(*this,this->currCycle)->getNode();
+    return innerTraversTree(*this, this->currCycle)->getNode();
 }
 
-CycleTree::CycleTree( int rootLabel, int currCycle) : Tree(rootLabel) ,currCycle(currCycle){
+CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle) {
 
 }
 
-const CycleTree * CycleTree::innerTraversTree(const Tree & root,int c) {
+const CycleTree *CycleTree::innerTraversTree(const Tree &root, int c) {
     //in case last
-    if (c<1)
+    if (c < 1)
         return dynamic_cast<const CycleTree *>(&root);
     //return non end;
     if (root.getChildren().empty())
-        return new CycleTree(-1,c-1);
-    else{
-        auto oldTreeChildren=root.getChildren();
+        return new CycleTree(-1, c - 1);
+    else {
+        auto oldTreeChildren = root.getChildren();
         for (auto oldTreeChild = oldTreeChildren.begin(); oldTreeChild < oldTreeChildren.end(); ++oldTreeChild) {
-            const Tree * child= (*oldTreeChild);
-            auto childForTest=innerTraversTree(*child, c - 1);
+            const Tree *child = (*oldTreeChild);
+            auto childForTest = innerTraversTree(*child, c - 1);
             //found the end
             if (childForTest->getNode() != -1)
                 return childForTest;
-            delete & childForTest;
-            c=childForTest->currCycle;
+            delete &childForTest;
+            c = childForTest->currCycle;
         }
     }
-    return new CycleTree(-1,c);
+    return new CycleTree(-1, c);
 }
 
 MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
@@ -148,7 +148,7 @@ MaxRankTree::MaxRankTree(int rootLabel) : Tree(rootLabel) {
 }
 
 int MaxRankTree::traceTree() {
-    return searchForMaxRank(*this).getNode();
+    return searchForMaxRank()->getNode();
 }
 
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
@@ -156,18 +156,24 @@ RootTree::RootTree(int rootLabel) : Tree(rootLabel) {
 }
 
 
-const MaxRankTree &MaxRankTree::searchForMaxRank(MaxRankTree &node) {
-    if (node.getChildren().empty())
-        return node;
-    auto children =  node.getChildren();
-    const auto childCount = children.size();
-    auto *maxChild = const_cast<MaxRankTree *>(&node);
-    for (int i = 0; i < childCount; i++) {
-        auto child =searchForMaxRank(dynamic_cast<MaxRankTree &>(*children[i]));
-        if (child.getChildren().size() > maxChild->getChildren().size())
-            maxChild = &child;
+const MaxRankTree * MaxRankTree::searchForMaxRank() const {
+    if (this->getChildren().empty())
+        return this;
+    auto children = this->getChildren();
+    int maxChildCount = getChildren().size();
+    const MaxRankTree *maxChild = nullptr;
+    for (auto child = children.begin(); child < children.end(); ++child) {
+        auto castedMaxRank = dynamic_cast<MaxRankTree *>(*child);
+        auto childToTest = castedMaxRank->searchForMaxRank();
+        if (childToTest->getChildren().size() > maxChildCount) {
+            maxChildCount = childToTest->getChildren().size();
+            maxChild = childToTest;
+        }
     }
-    return *maxChild;
+    if (maxChild != nullptr)
+        return maxChild;
+    else
+        return this;
 }
 
 int RootTree::traceTree() {

@@ -6,47 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/denis/CLionProjects/home1/cpp/Agent.cpp
-iostream
--
-../include/Agent.h
-/home/denis/CLionProjects/home1/include/Agent.h
-
-/home/denis/CLionProjects/home1/cpp/Graph.cpp
-iostream
--
-../include/Graph.h
-/home/denis/CLionProjects/home1/include/Graph.h
-
-/home/denis/CLionProjects/home1/cpp/Session.cpp
-iostream
--
-fstream
-/home/denis/CLionProjects/home1/cpp/fstream
-../lib/json.hpp
-/home/denis/CLionProjects/home1/lib/json.hpp
-../include/Session.h
-/home/denis/CLionProjects/home1/include/Session.h
-../include/Tree.h
-/home/denis/CLionProjects/home1/include/Tree.h
-../include/Agent.h
-/home/denis/CLionProjects/home1/include/Agent.h
-
 /home/denis/CLionProjects/home1/cpp/Tree.cpp
 iostream
 -
 ../include/Tree.h
 /home/denis/CLionProjects/home1/include/Tree.h
-
-/home/denis/CLionProjects/home1/include/Agent.h
-vector
--
-Session.h
-/home/denis/CLionProjects/home1/include/Session.h
-Tree.h
-/home/denis/CLionProjects/home1/include/Tree.h
-Graph.h
-/home/denis/CLionProjects/home1/include/Graph.h
 
 /home/denis/CLionProjects/home1/include/Graph.h
 vector
@@ -405,10 +369,4 @@ limits
 -
 type_traits
 -
-
-/home/denis/CLionProjects/home1/main.cpp
-iostream
--
-include/Session.h
-/home/denis/CLionProjects/home1/include/Session.h
 

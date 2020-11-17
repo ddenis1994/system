@@ -27,8 +27,12 @@ public:
     void setTreeType(const std::string& type);
     static nlohmann::json extractFromJsonFilePath(const std::string & jsonPath);
     void enqueueInfected(int);
-    int dequeueInfected();
+    int getLastInfected()const;
+    bool checkIfNodeInfected(int node) const;
+    bool checkIfNodeAgent(int node) const ;
     TreeType getTreeType() const;
+    std::queue<int> & getInfected();
+
 
 private:
     Graph g ;
@@ -37,6 +41,8 @@ private:
     std::queue<int> infected;
     bool cycle();
     bool checkEnd();
+    std::vector<Agent*> copyAgents() const;
+
 };
 
 #endif

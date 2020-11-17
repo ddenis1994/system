@@ -29,12 +29,7 @@ Graph::Graph(const Graph &graph)
     infected = graph.infected;
 }
 Graph::~Graph() {
-    for (std::vector<int> v : edges)
-    {
-        delete(&v);
-    }
-    delete(&edges);
-    delete(&infected);
+    //no need fo dtor all is in the heap
 }
 
 std::vector<std::vector<int>> Graph::getGraph() const {
