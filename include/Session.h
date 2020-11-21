@@ -23,16 +23,19 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-    Graph getGraph() const;
+    const Graph & getGraph() const;
     void setTreeType(const std::string& type);
     static nlohmann::json extractFromJsonFilePath(const std::string & jsonPath);
     void enqueueInfected(int);
-    int getLastInfected()const;
-    bool checkIfNodeInfected(int node) const;
+    int dequeueInfected();
     bool checkIfNodeAgent(int node) const ;
     TreeType getTreeType() const;
-    std::queue<int> & getInfected();
+    bool isInfected(const int nodeInd) const;
+    void infectNode(const int nodeInd);
+    std::vector<Agent*> copyAgents() const;
+    void disconnectNode(const int nodeId);
 
+    std::vector<int> getNeighboursOfNode(const int i);
 
 private:
     Graph g ;
@@ -41,8 +44,9 @@ private:
     std::queue<int> infected;
     bool cycle();
     bool checkEnd();
-    std::vector<Agent*> copyAgents() const;
 
+
+    bool virusStoped();
 };
 
 #endif

@@ -17,14 +17,14 @@ void Tree::addChild(Tree &child) {
 
 Tree *Tree::createTree(const Session &session, int rootLabel) {
     Tree::type = session.getTreeType();
-    Graph graph = session.getGraph();
+    const Graph & graph = session.getGraph();
     Tree *root = makeTreeByType(rootLabel);
     makeBfsTree(graph, root);
     return root;
 }
 
 
-void Tree::makeBfsTree(const Graph &graph, Tree *root) {
+void Tree::makeBfsTree(Graph graph, Tree *root) {
     auto numVertices = (graph.getGraph().size()) - 1;
     bool *visited;
     visited = new bool[numVertices];

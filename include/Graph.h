@@ -10,9 +10,11 @@ public:
     Graph(const Graph& graph);
     ~Graph();
     void infectNode(int nodeInd);
-    bool isInfected(int nodeInd);
+    bool isInfected(int nodeInd) const;
+    void disconnectNodeFromAll(const int node);
+    std::vector<std::vector<int>> & getGraph();
 
-    std::vector<std::vector<int>> getGraph() const;
+    bool isAllInfected();
 
 private:
     std::vector<std::vector<int>> edges;

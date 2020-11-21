@@ -20,7 +20,7 @@ class ContactTracer: public Agent{
 public:
     ContactTracer();
     virtual Agent * copy();
-    void disconnectNode(Session & session, const int nodeId);
+
     virtual void act(Session& session);
 };
 

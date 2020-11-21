@@ -23,7 +23,7 @@ public:
 private:
 
     int node{};
-    static void makeBfsTree(const Graph & graph, Tree *root);
+    static void makeBfsTree(Graph graph, Tree *root);
     static Tree *makeTreeByType( int node);
     std::vector<Tree*> children;
 };

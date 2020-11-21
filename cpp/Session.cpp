@@ -24,11 +24,12 @@ bool Session::cycle() {
         a->act(*this);
     for (Agent *a : test)
         delete a;
-    return !this->checkEnd();
+    return this->checkEnd();
 }
 
 bool Session::checkEnd() {
-    return true;
+
+    return g.isAllInfected() || virusStoped();
 }
 
 
@@ -41,7 +42,7 @@ void Session::setGraph(const Graph &graph) {
 }
 
 void Session::enqueueInfected(int n) {
-    this->infected.push(n);
+    infected.push(n);
 }
 
 
@@ -92,27 +93,10 @@ nlohmann::json Session::extractFromJsonFilePath(const string &jsonPath) {
     return jsonData;
 }
 
-Graph Session::getGraph() const {
+const Graph & Session::getGraph() const {
     return g;
 }
 
-std::queue<int> &Session::getInfected() {
-    return this->infected;
-}
-
-bool Session::checkIfNodeInfected(int node) const {
-    std::queue<int> copy = std::queue<int>(infected);
-    while (!copy.empty()) {
-        int infectedNode = copy.front();
-        if (infectedNode == node) return true;
-        copy.pop();
-    }
-    return false;
-}
-
-int Session::getLastInfected() const {
-    return infected.front();
-}
 
 bool Session::checkIfNodeAgent(int node) const {
     for (auto &agent:agents) {
@@ -127,6 +111,33 @@ std::vector<Agent *> Session::copyAgents() const {
     for (Agent *a : this->agents)
         copy.push_back(a->copy());
     return copy;
+}
+
+int Session::dequeueInfected() {
+    auto virus=infected.front();
+    infected.pop();
+    return virus;
+}
+
+bool Session::isInfected(const int nodeInd) const {
+    return g.isInfected(nodeInd);
+}
+
+void Session::infectNode(const int nodeInd) {
+    g.infectNode(nodeInd);
+}
+
+void Session::disconnectNode(const int nodeId) {
+    g.disconnectNodeFromAll(nodeId);
+}
+
+vector<int> Session::getNeighboursOfNode(const int i) {
+    return g.getGraph()[i];
+}
+
+bool Session::virusStoped() {
+    //TODO finish the check if virus can infect another node
+    return false;
 }
 
 

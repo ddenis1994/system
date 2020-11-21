@@ -1,7 +1,3 @@
-//
-// Created by denis on 08/11/2020.
-//
-
 #include <iostream>
 #include "../include/Agent.h"
 
@@ -10,43 +6,32 @@ class Tree;
 
 class Graph;
 
-Agent::Agent() {
-
-}
+Agent::Agent() = default;
 
 Agent *Agent::createAgent(std::pair<std::string, int> &agent) {
     if (agent.first == "V") return new Virus(agent.second);
     else if (agent.first == "C") return new ContactTracer();
     return nullptr;
 }
-Agent * Virus::copy() {
+
+Agent *Virus::copy() {
     return new Virus(nodeInd);
 }
 
 
 bool Virus::testIfAgent(int node) const {
-    return node==nodeInd;
+    return node == nodeInd;
 }
 
 
-ContactTracer::ContactTracer() {
-
-}
+ContactTracer::ContactTracer() = default;
 
 void ContactTracer::act(Session &session) {
-    int node = session.getLastInfected();
+    int node = session.dequeueInfected();
     Tree *t = Tree::createTree(session, node);
     int dis = t->traceTree();
-    disconnectNode(session,dis);
+    session.disconnectNode(dis);
 
-}
-
-void ContactTracer::disconnectNode(Session & session, const int nodeId) {
-    Graph graph=session.getGraph();
-    for (int i = 0; i < graph.getGraph().size(); i++) {
-        graph.getGraph()[i][nodeId]=0;
-        graph.getGraph()[nodeId][i]=0;
-    }
 }
 
 Agent *ContactTracer::copy() {
@@ -55,29 +40,21 @@ Agent *ContactTracer::copy() {
 
 
 void Virus::act(Session &session) {
-//    session.enqueueInfected(nodeInd);
-//    Graph g = session.getGraph();
-//    std::vector<int> connected = g.getGraph()[nodeInd];
-//    for (int i = 0; i < connected.size(); i++)
-//    {
-//        if (connected[i] == 0)
-//            continue;
-//        if (g.isInfected(i))
-//            continue;
-//        g.infectNode(i);
-//        createAgent(*new std::pair<std::string, int> ("V",i));
-//    }
-    if (!session.checkIfNodeInfected(nodeInd)) session.enqueueInfected(nodeInd);
-    auto connected = session.getGraph().getGraph()[nodeInd];
-    for (int &connectedNode : connected) {
+    if (!session.isInfected(nodeInd)) {
+        session.infectNode(nodeInd);
+        session.enqueueInfected(nodeInd);
+    }
+    auto connected = session.getNeighboursOfNode(nodeInd);
+    int nodeToInfect=-1;
+    for (int  connectedNode : connected) {
+        nodeToInfect++;
         if (connectedNode == 1)
-            if (!session.checkIfNodeAgent(connectedNode)) {
-                Agent *v = new Virus(connectedNode);
+            if (!session.checkIfNodeAgent(nodeToInfect)) {
+                Agent *v = new Virus(nodeToInfect);
                 session.addAgent(*v);
-                break;
+                return;
             }
     }
-
 }
 
 Virus::Virus(int nodeInd) : nodeInd(nodeInd) {
