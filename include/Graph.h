@@ -19,6 +19,8 @@ public:
 private:
     std::vector<std::vector<int>> edges;
     std::vector<int> infected;
+public:
+    const std::vector<int> &getInfected() const;
 
 };
 

@@ -9,16 +9,16 @@ using namespace std;
 
 Graph::Graph(std::vector<std::vector<int>> matrix) {
     this->edges=std::move(matrix);
-    for (int i = 0; i < this->edges.size(); i++)
-        infected.push_back(0);
 }
 
 void Graph::infectNode(int nodeInd) {
-    infected[nodeInd] = 1;
+    infected.push_back(nodeInd);
 }
 
 bool Graph::isInfected(int nodeInd) const{
-    return infected[nodeInd] == 1;
+    for(auto node:infected)
+        if ( node == nodeInd) return true;
+    return false;
 }
 
 Graph::Graph() {
@@ -49,5 +49,9 @@ bool Graph::isAllInfected() {
         if (node==0) return false;
     }
     return true;
+}
+
+const vector<int> &Graph::getInfected() const {
+    return infected;
 }
 

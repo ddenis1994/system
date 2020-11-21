@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "fstream"
 #include "../lib/json.hpp"
 #include "../include/Session.h"
@@ -13,8 +14,10 @@ using json = nlohmann::json;
 void Session::simulate() {
     while (true) {
         bool cont = this->cycle();
-        if (!cont)
+        if (cont) {
+            printData();
             break;
+        }
     }
 }
 
@@ -29,7 +32,7 @@ bool Session::cycle() {
 
 bool Session::checkEnd() {
 
-    return g.isAllInfected() || virusStoped();
+    return g.isAllInfected() || virusStooped();
 }
 
 
@@ -62,11 +65,8 @@ Session::Session(const std::string &path) {
 }
 
 Session::~Session() {
-    delete (&g);
     for (Agent *a : agents)
         delete (a);
-    delete (&agents);
-    delete (&infected);
 }
 
 Session::Session(const Session &session) {
@@ -135,9 +135,26 @@ vector<int> Session::getNeighboursOfNode(const int i) {
     return g.getGraph()[i];
 }
 
-bool Session::virusStoped() {
-    //TODO finish the check if virus can infect another node
+bool Session::virusStooped() {
+    for (auto &agent:agents) {
+        auto *d = dynamic_cast<Virus *>(agent);
+        if (d && virusCanSpared(d->getNodeInd())) return false;
+    }
+    return true;
+}
+
+bool Session::virusCanSpared(int infectedNode) {
+    for (int & connection :g.getGraph()[infectedNode])
+        if (connection ==1) return true;
     return false;
+}
+
+void Session::printData() {
+    std::ofstream  i("output.json");
+    json j;
+    j["graph"]=g.getGraph();
+    j["infected"]=g.getInfected();
+    i <<   j << std::endl;
 }
 
 

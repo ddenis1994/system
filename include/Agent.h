@@ -33,6 +33,8 @@ public:
     virtual void act(Session& session);
 private:
     const int nodeInd;
+public:
+    const int getNodeInd() const;
 };
 
 #endif

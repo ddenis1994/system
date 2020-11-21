@@ -42,6 +42,7 @@ public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
 
+
 private:
      const MaxRankTree * searchForMaxRank() const  ;
 };

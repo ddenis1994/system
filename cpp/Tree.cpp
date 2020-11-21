@@ -10,7 +10,6 @@ Tree::Tree(int rootLabel) : node(rootLabel) {
 }
 
 void Tree::addChild(Tree &child) {
-
     children.push_back(&child);
 }
 
@@ -91,7 +90,6 @@ Tree::Tree(const Tree &oldTree) {
 }
 
 Tree::~Tree() {
-
     if (!this->getChildren().empty()) {
         int numOfChildren = this->getChildren().size();
         for (int i = 0; i < numOfChildren; i++) {
@@ -114,7 +112,8 @@ Tree *Tree::copy() {
 }
 
 int CycleTree::traceTree() {
-    return innerTraversTree(*this, this->currCycle)->getNode();
+
+    return innerTraversTree(*this, currCycle++)->getNode();
 }
 
 CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle) {
@@ -173,6 +172,8 @@ const MaxRankTree *MaxRankTree::searchForMaxRank() const {
     return maxChild;
 
 }
+
+
 
 int RootTree::traceTree() {
     return this->getNode();

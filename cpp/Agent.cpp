@@ -31,6 +31,7 @@ void ContactTracer::act(Session &session) {
     Tree *t = Tree::createTree(session, node);
     int dis = t->traceTree();
     session.disconnectNode(dis);
+    delete t;
 
 }
 
@@ -59,6 +60,10 @@ void Virus::act(Session &session) {
 
 Virus::Virus(int nodeInd) : nodeInd(nodeInd) {
 
+}
+
+const int Virus::getNodeInd() const {
+    return nodeInd;
 }
 
 

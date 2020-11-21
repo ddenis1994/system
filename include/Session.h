@@ -46,7 +46,11 @@ private:
     bool checkEnd();
 
 
-    bool virusStoped();
+    bool virusStooped();
+
+    bool virusCanSpared(int infectedNode);
+
+    void printData();
 };
 
 #endif
