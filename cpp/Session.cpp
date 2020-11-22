@@ -12,6 +12,7 @@ using namespace std;
 using json = nlohmann::json;
 
 void Session::simulate() {
+    cycleNum = -1;
     while (true) {
         bool cont = this->cycle();
         if (cont) {
@@ -22,12 +23,16 @@ void Session::simulate() {
 }
 
 bool Session::cycle() {
+    cycleNum++;
     auto test = copyAgents();
     for (Agent *a : test)
         a->act(*this);
     for (Agent *a : test)
         delete a;
     return this->checkEnd();
+}
+int Session::getCycle() const {
+    return cycleNum;
 }
 
 bool Session::checkEnd() {

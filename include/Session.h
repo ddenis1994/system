@@ -34,7 +34,7 @@ public:
     void infectNode(const int nodeInd);
     std::vector<Agent*> copyAgents() const;
     void disconnectNode(const int nodeId);
-
+    int getCycle() const;
     std::vector<int> getNeighboursOfNode(const int i);
 
 private:
@@ -42,6 +42,7 @@ private:
     TreeType treeType;
     std::vector<Agent*> agents;
     std::queue<int> infected;
+    int cycleNum;
     bool cycle();
     bool checkEnd();
 

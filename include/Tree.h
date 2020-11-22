@@ -19,7 +19,7 @@ public:
     virtual int traceTree()=0;
     std::vector<Tree *> getChildren() const;
     static TreeType type;
-
+    static int cycle;
 private:
 
     int node{};

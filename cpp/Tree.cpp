@@ -4,6 +4,7 @@
 using namespace std;
 
 TreeType Tree::type;
+int Tree::cycle;
 
 Tree::Tree(int rootLabel) : node(rootLabel) {
 
@@ -16,6 +17,7 @@ void Tree::addChild(Tree &child) {
 
 Tree *Tree::createTree(const Session &session, int rootLabel) {
     Tree::type = session.getTreeType();
+    Tree::cycle = session.getCycle();
     const Graph & graph = session.getGraph();
     Tree *root = makeTreeByType(rootLabel);
     makeBfsTree(graph, root);
@@ -57,7 +59,7 @@ Tree *Tree::makeTreeByType(int node) {
             root = new RootTree(node);
             break;
         case Cycle:
-            root = new CycleTree(node, 0);
+            root = new CycleTree(node, cycle);
             break;
         case MaxRank:
             root = new MaxRankTree(node);
@@ -113,7 +115,10 @@ Tree *Tree::copy() {
 
 int CycleTree::traceTree() {
 
-    return innerTraversTree(*this, currCycle++)->getNode();
+    int n = innerTraversTree(*this, currCycle++)->getNode();
+    if (n == -1)
+        return getNode();
+    return n;
 }
 
 CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle) {
@@ -122,11 +127,11 @@ CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(
 
 const CycleTree *CycleTree::innerTraversTree(const Tree &root, int c) {
     //in case last
-    if (c < 1)
+    if (c <= 1)
         return dynamic_cast<const CycleTree *>(&root);
     //return non end;
     if (root.getChildren().empty())
-        return new CycleTree(-1, c - 1);
+        return new CycleTree(-1, c);
     else {
         auto oldTreeChildren = root.getChildren();
         for (auto oldTreeChild = oldTreeChildren.begin(); oldTreeChild < oldTreeChildren.end(); ++oldTreeChild) {
@@ -135,7 +140,7 @@ const CycleTree *CycleTree::innerTraversTree(const Tree &root, int c) {
             //found the end
             if (childForTest->getNode() != -1)
                 return childForTest;
-            delete &childForTest;
+            //delete &childForTest;
             c = childForTest->currCycle;
         }
     }
