@@ -28,6 +28,7 @@ ContactTracer::ContactTracer() = default;
 
 void ContactTracer::act(Session &session) {
     int node = session.dequeueInfected();
+    if (node ==-1) return;
     Tree *t = Tree::createTree(session, node);
     int dis = t->traceTree();
     session.disconnectNode(dis);

@@ -114,6 +114,7 @@ std::vector<Agent *> Session::copyAgents() const {
 }
 
 int Session::dequeueInfected() {
+    if(infected.empty()) return -1;
     auto virus=infected.front();
     infected.pop();
     return virus;
@@ -144,8 +145,10 @@ bool Session::virusStooped() {
 }
 
 bool Session::virusCanSpared(int infectedNode) {
-    for (int & connection :g.getGraph()[infectedNode])
-        if (connection ==1) return true;
+    for (int node=0;node<g.getGraph()[infectedNode].size();node++){
+        if (g.getGraph()[infectedNode][node] ==1 && !checkIfNodeAgent(node)) return true;
+    }
+
     return false;
 }
 
