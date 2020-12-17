@@ -11,20 +11,20 @@ TARGERDIR=bin/
 all: clean Graph Session Agent Tree main target
 
 
-Graph: cpp/Graph.cpp include/Graph.h
-	$(CC) $(CFLAGS) -c cpp/Graph.cpp -o $(TARGERDIR)Graph.o
+Graph: src/Graph.cpp src/Graph.h
+	$(CC) $(CFLAGS) -c src/Graph.cpp -o $(TARGERDIR)Graph.o
 
-Session: include/Session.h cpp/Session.cpp
-	$(CC) $(CFLAGS) -c cpp/Session.cpp -o $(TARGERDIR)Session.o
+Session: src/Session.h src/Session.cpp
+	$(CC) $(CFLAGS) -c src/Session.cpp -o $(TARGERDIR)Session.o
 
-Agent: include/Agent.h cpp/Agent.cpp
-	$(CC) $(CFLAGS) -c cpp/Agent.cpp -o $(TARGERDIR)Agent.o
+Agent: include/Agent.h src/Agent.cpp
+	$(CC) $(CFLAGS) -c src/Agent.cpp -o $(TARGERDIR)Agent.o
 
-Tree: include/Tree.h cpp/Tree.cpp
-	$(CC) $(CFLAGS) -c cpp/Tree.cpp -o $(TARGERDIR)Tree.o
+Tree: include/Tree.h src/Tree.cpp
+	$(CC) $(CFLAGS) -c src/Tree.cpp -o $(TARGERDIR)Tree.o
 
-main: main.cpp
-	$(CC) $(CFLAGS) -c -c main.cpp -o $(TARGERDIR)main.o
+main: src/main.cpp
+	$(CC) $(CFLAGS) -c -c src/main.cpp -o $(TARGERDIR)main.o
 
 target : $(TARGERDIR)Agent.o $(TARGERDIR)Graph.o $(TARGERDIR)Session.o $(TARGERDIR)Tree.o $(TARGERDIR)main.o
 	$(CC) $(CFLAGS) $(TARGERDIR)Agent.o $(TARGERDIR)Graph.o $(TARGERDIR)Session.o $(TARGERDIR)Tree.o $(TARGERDIR)main.o -o $(TARGERDIR)$(TARGET)
